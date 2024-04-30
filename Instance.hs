@@ -1,10 +1,9 @@
 module Instance where
 
 import Module
-import Class
-
+import Queue
 data PQueue = PQueue [StudentRecord]
-    deriving (Show)
+  deriving (Show)
 
 instance Queue PQueue where
     enqueue (PQueue records) record = PQueue (records ++ [record])
