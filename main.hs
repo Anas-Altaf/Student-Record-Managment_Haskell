@@ -1,14 +1,23 @@
-module Main where
- 
- import Module import Class import Instance
-main :: IO () main = do
-let stud1 = StudentRecord { rollNo = 3737, name = "Umair", registeredCourses = ["Math", "Physics"] }
-stud2 = StudentRecord { rollNo = 3711, name = "Zara", registeredCourses = ["PF", "Calculus"] }
-stud3 = StudentRecord { rollNo = 3769, name = "Jhonny", registeredCourses = ["PakStudies", "CPS"] }
-priorityQueue = enqueue (enqueue (enqueue (PriorityQueue []) stud1) stud2) stud3 (nextStudent, remPriorityQueue) = dequeue priorityQueue
-circularQueue = enqueue (enqueue (enqueue (CircularQueue 3 []) stud1) stud2) stud3 (nextCircularStudent, remCircularQueue) = dequeue circularQueue
-print "Priority Queue Example:"
-print $ "Next student: " ++ show nextStudent
-print $ "Remaining Queue: " ++ show remPriorityQueue
-print "Circular Queue Example:"
-print $ "Next student: " ++ show nextCircularStudent print $ "Remaining Queue: " ++ show remCircularQueue
+import Module
+import Class
+import Instance
+
+main :: IO ()
+main = do
+    let stdnt1 = StudentRecord { rollNo = 11122, name = "Mustafa", registeredCourses = ["Algebra", "Physics"] }
+        stdnt2 = StudentRecord { rollNo = 33889, name = "Zainab", registeredCourses = ["Programming Fundamentals", "Calculus"] }
+        stdnt3 = StudentRecord { rollNo = 39563, name = "Fatima", registeredCourses = ["Pakistani Studies", "Computer Science"] }
+
+    let pQueue = enqueue (enqueue (enqueue (PQueue []) stdnt1) stdnt2) stdnt3
+        (firstStudent, remainingPQueue) = dequeue pQueue
+
+    let cQueue = enqueue (enqueue (enqueue (CQueue 3 []) stdnt1) stdnt2) stdnt3
+        (firstCircularStud, remainingCircQueue) = dequeue cQueue
+
+    putStrLn "Priority Queue Example:"
+    putStrLn $ "First student: " ++ show firstStudent
+    putStrLn $ "Remaining Queue: " ++ show remainingPQueue
+
+    putStrLn "Circular Queue Example:"
+    putStrLn $ "First student: " ++ show firstCircularStud
+    putStrLn $ "Remaining Queue: " ++ show remainingCircQueue
