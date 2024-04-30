@@ -1,7 +1,5 @@
--- Module.hs
 module Module where
-
-type RollNumber = Int
-type Name = String
-type Course = String
-type StudentRecord = (RollNumber, Name, [Course])
+data StudentRecord = StudentRecord { rollNo :: Int,
+name :: String,
+registeredCourses :: [String]
+} deriving (Show)

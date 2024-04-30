@@ -1,28 +1,14 @@
--- -- Main.hs
--- module Main where
--- import Class (Queue(..))
--- import Module (StudentRecord)
--- import Instance (PriorityQueue(..), CircularQueue(..))
-
--- main :: IO()
--- main = do
---   let students = [(1, "Alice", ["Math", "Science"]), (2, "Bob", ["English", "History"])]
---   let pq = foldr enqueue (PriorityQueue []) students
---   let cq = foldr enqueue (CircularQueue 10 []) students
---   print (peek pq)
---   print (peek cq)
-
--- Main.hs
-import Queue
-import SpecializedQueues
-import Helpers
-
-main :: IO ()
-main = do
-    let pq = PriorityQueue [] compareStudents
-    let student1 = (1, "Alice", ["Math", "Physics"])
-    let student2 = (2, "Bob", ["Chemistry", "Biology"])
-    let pq' = enqueuePQ student1 pq
-    let pq'' = enqueuePQ student2 pq'
-    print pq''
-
+module Main where
+ 
+ import Module import Class import Instance
+main :: IO () main = do
+let stud1 = StudentRecord { rollNo = 3737, name = "Umair", registeredCourses = ["Math", "Physics"] }
+stud2 = StudentRecord { rollNo = 3711, name = "Zara", registeredCourses = ["PF", "Calculus"] }
+stud3 = StudentRecord { rollNo = 3769, name = "Jhonny", registeredCourses = ["PakStudies", "CPS"] }
+priorityQueue = enqueue (enqueue (enqueue (PriorityQueue []) stud1) stud2) stud3 (nextStudent, remPriorityQueue) = dequeue priorityQueue
+circularQueue = enqueue (enqueue (enqueue (CircularQueue 3 []) stud1) stud2) stud3 (nextCircularStudent, remCircularQueue) = dequeue circularQueue
+print "Priority Queue Example:"
+print $ "Next student: " ++ show nextStudent
+print $ "Remaining Queue: " ++ show remPriorityQueue
+print "Circular Queue Example:"
+print $ "Next student: " ++ show nextCircularStudent print $ "Remaining Queue: " ++ show remCircularQueue

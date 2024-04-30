@@ -1,22 +1,17 @@
--- Instance.hs
 module Instance where
-import Class (Queue(..))
-import Module (StudentRecord)
-data PriorityQueue = PriorityQueue [StudentRecord]
-data CircularQueue = CircularQueue Int [StudentRecord]
-
+import Module
+import Class
+data PriorityQueue = PriorityQueue [StudentRecord] deriving (Show)
 instance Queue PriorityQueue where
-  enqueue record (PriorityQueue q) = PriorityQueue (insertBy compareRecord record q)
-  dequeue (PriorityQueue (x:xs)) = (x, PriorityQueue xs)
-  peek (PriorityQueue (x:_)) = x
-  isEmpty (PriorityQueue q) = null q
-
+enqueue (PriorityQueue records) record = PriorityQueue (records ++ [record]) dequeue (PriorityQueue []) = error "Queue is already Empty"
+dequeue (PriorityQueue (x:xs)) = (x, PriorityQueue xs)
+peek (PriorityQueue []) = error "Queue is already Empty"
+peek (PriorityQueue (x:_)) = x
+isEmpty (PriorityQueue records) = null records
+data CircularQueue = CircularQueue Int [StudentRecord] deriving (Show)
 instance Queue CircularQueue where
-  enqueue record (CircularQueue size q) = CircularQueue size (take size (record:q))
-  dequeue (CircularQueue size (x:xs)) = (x, CircularQueue size xs)
-  peek (CircularQueue _ (x:_)) = x
-  isEmpty (CircularQueue _ q) = null q
-
-compareRecord :: StudentRecord -> StudentRecord -> Ordering
-compareRecord (roll1, _, _) (roll2, _, _) = compare roll1 roll2
-
+enqueue (CircularQueue maxSize records) record
+| length records < maxSize = CircularQueue maxSize (records ++ [record])
+| otherwise = CircularQueue maxSize (tail records ++ [record]) dequeue (CircularQueue _ []) = error "Queue is already Empty!!!" dequeue (CircularQueue maxSize (x:xs)) = (x, CircularQueue maxSize xs) peek (CircularQueue _ []) = error "Queue is already Empty!!!"
+peek (CircularQueue _ (x:_)) = x
+isEmpty (CircularQueue _ records) = null records
