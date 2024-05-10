@@ -8,4 +8,4 @@
 + Instance.hs
 + Main.hs
 ## Written by
-[Anas Altaf](https://anas-altaf.github.io)
+[@Anas Altaf](https://anas-altaf.github.io)
